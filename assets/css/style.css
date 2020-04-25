@@ -25,3 +25,14 @@
     font-family: ("Montserrat", 500i);
     padding-top: 20px;
 }
+/* Form */
+.form-group {
+    font-family: ("Montserrat", 600);
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.search-button {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
