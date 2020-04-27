@@ -36,3 +36,8 @@
     margin-left: 20px;
     margin-bottom: 20px;
 }
+
+/* Map */
+#map {
+    min-height: 300px;
+}
