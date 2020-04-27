@@ -41,3 +41,8 @@
 #map {
     min-height: 300px;
 }
+
+#data {
+    padding: 25px;
+    color: #000000;
+}
