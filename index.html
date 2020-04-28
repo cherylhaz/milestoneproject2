@@ -22,7 +22,7 @@
     <p>Looking to hike on your next holiday?<br> Search for the perfect trail to enjoy on your next vacation.</p>
     </section>
     <section id="search-form">
-    <form>
+    <form onsubmit="return sendSearch(this);" method="GET">
     <div class="form-group">
     <label for="country">Choose a destination:</label>
     <select class="form-control" id="country">
@@ -34,13 +34,13 @@
     </select>
   </div>
     <div class="form-group">
-    <label for="distance">Choose a maximum distance in miles:</label>
+    <label for="distance">Choose a minimum length in miles:</label>
     <select class="form-control" id="distance">
-      <option>less than 2</option>
-      <option>2-5</option>
-      <option>5-10</option>
-      <option>10-15</option>
-      <option>15+</option>
+      <option>2</option>
+      <option>5</option>
+      <option>10</option>
+      <option>15</option>
+      <option>100</option>
     </select>
   </div>
     <div class="form-group">
@@ -66,5 +66,6 @@
     <script src= "https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBJuCqDWjBoOeFEnU2j866UaLYS8W3I0A&callback=initMap"></script>
     <script src="assets/js/maps.js"></script>
+    <script src="assets/js/search.js"></script>
 </body>
 </html>
