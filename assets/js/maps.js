@@ -1,24 +1,4 @@
- /*
-var xhr = new XMLHttpRequest();
-function dataCall(){
-$.ajax({
-    xhrFields: {
-        withCredentials: true
-    },
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', '200735964-55871b76fd696d0af0539bd9bc3b2dd6');
-    },
 
-    url: "https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200735964-55871b76fd696d0af0539bd9bc3b2dd6",
-    type: "GET",
-    data: {
-        "url" : 'https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200735964-55871b76fd696d0af0539bd9bc3b2dd6'
-    }
-}).done(function(data){
-    console.log(data);
-});
-}
-*/
 
 var map;
     function initMap() {
@@ -29,14 +9,20 @@ var map;
         });
     };
 
-        // Create a <script> tag and set the USGS URL as the source.
-        var script = document.createElement('script');
-        // This example uses a local copy of the GeoJSON stored at
-        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-        script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-        document.getElementsByTagName('head')[0].appendChild(script);
+    function getData(cb){
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200735964-55871b76fd696d0af0539bd9bc3b2dd6");
+        xhr.send();
+        xhr.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+                cb(JSON.parse(this.responseText));
+            }}};
     
-
+            getData (function(data){
+                console.log(data);
+            });
+            
+//Code used from Google Tutorial - https://developers.google.com/maps/documentation/javascript/importing_data
       // Loop through the results array and place a marker for each
       // set of coordinates.
       window.eqfeed_callback = function(results) {
@@ -48,3 +34,5 @@ var map;
             map: map
           });
         }}
+
+//End of Google Code
