@@ -22,7 +22,7 @@
     <p>Looking to hike on your next holiday?<br> Search for the perfect trail to enjoy on your next vacation.</p>
     </section>
     <section id="search-form">
-    <form onsubmit="return sendSearch(this);" method="GET">
+    <form onclick="return sendSearch();">
     <div class="form-group">
     <label for="country">Choose a destination:</label>
     <select class="form-control" id="country">
@@ -58,7 +58,7 @@
     </section>
     <section class="container-fluid">
     <div id="map"></div>
-    
+    <div id="data"></div>
     </section>
     <footer class="container-fluid footer">
     <p>2020<br>Created by: Cheryl</p>
