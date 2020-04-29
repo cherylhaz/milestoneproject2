@@ -22,7 +22,7 @@
     <p>Looking to hike on your next holiday?<br> Search for the perfect trail to enjoy on your next vacation.</p>
     </section>
     <section id="search-form">
-    <form onclick="return sendSearch();">
+    <form onclick="return getData();">
     <div class="form-group">
     <label for="country">Choose a destination:</label>
     <select class="form-control" id="country">
@@ -58,6 +58,7 @@
     </section>
     <section class="container-fluid">
     <div id="map"></div>
+    <button onclick="writeToDocument('7011192')">Results</button>
     <div id="data"></div>
     </section>
     <footer class="container-fluid footer">
