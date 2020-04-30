@@ -4,7 +4,6 @@
 //var switzerland = (lat: 46.8182, lon: 8.2275)
 //var spain = (lat: 40.4637, lon: 3.7492)
 
-
 function search(event){
     
     var choosenCountry = $("#country").val();
@@ -15,7 +14,7 @@ function search(event){
     $.when.call(getData).then(
         function(response) {
             var userData = response;
-            $("#data").html(writeToDocument(data));
+            $("#data").html(writeToDocument(userData));
         },
         function(errorResponse) {
             if (errorResponse.status === 404) {
@@ -32,58 +31,25 @@ function search(event){
     function getData(id,cb){
 
         var xhr = new XMLHttpRequest();
-
-        xhr.open("GET", "https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=5&key=200735964-55871b76fd696d0af0539bd9bc3b2dd6");
+        var choosenCountry = $("#country").val();
+    if(choosenCountry == "Ireland"){
+        xhr.open("GET", "https://www.hikingproject.com/data/get-trails-by-id?ids=7047180,7035642,7078363,7091282,7029957,7063360,7019238&key=200735964-55871b76fd696d0af0539bd9bc3b2dd6");
         xhr.send();
 
         xhr.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200){
               cb(JSON.parse(this.responseText));
-        }};
+        }}
     }
-
-    function getTableHeaders(obj){
-        var tableHeaders = [];
-        Object.keys(obj).forEach(function(key){
-            tableHeaders.push(`<td>${key}</td>`);
-        });
-        return `<tr>${tableHeaders}</tr>`;
-    }
-
-
-    function writeToDocument(id){
-        var tableRows = [];
-        var el = document.getElementById("data");
-        el.innerHTML = "";
-
-            getData(id, function(data){
-                data = data.trails;
-                var tableHeaders = getTableHeaders(data[0]);
-
-                data.forEach(function(item) {
-                    var dataRow = [];
-
-                    Object.keys(item).forEach(function(key){
-
-                        dataRow.push(`<td>${item[key]}</td>`);
-                    });
-                    tableRows.push(`<tr>${dataRow}</tr>`);
-                });
-                el.innerHTML = `<table>${tableHeaders}${tableRows}</table>`.replace(/,/g, "");
-            });
     
-         
-//Code used from Google Tutorial - https://developers.google.com/maps/documentation/javascript/importing_data
-      // Loop through the results array and place a marker for each
-      // set of coordinates.
-      window.eqfeed_callback = function(results) {
-        for (var i = 0; i < results.features.length; i++) {
-          var coords = results.features[i].geometry.coordinates;
-          var latLng = new google.maps.LatLng(coords[1],coords[0]);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-          });
-        }};
-    }
-//End of Google Code
+    else {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200735964-55871b76fd696d0af0539bd9bc3b2dd6");
+        xhr.send();
+
+        xhr.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+              cb(JSON.parse(this.responseText));
+            }
+    };
+}}
