@@ -16,17 +16,37 @@
               cb(JSON.parse(this.responseText));
         }};
     }
+
+    function getTableHeaders(obj){
+        var tableHeaders = [];
+        Object.keys(obj).forEach(function(key){
+            tableHeaders.push(`<td>${key}</td>`);
+        });
+        return `<tr>${tableHeaders}</tr>`;
+    }
+
+
     function writeToDocument(id){
+        var tableRows = [];
         var el = document.getElementById("data");
         el.innerHTML = "";
+
             getData(id, function(data){
                 data = data.trails;
+                var tableHeaders = getTableHeaders(data[0]);
 
-                data.forEach(function(item){
-                    el.innerHTML += "<p>" + item.name +"</p>";
-                })
-                
-            })
+                data.forEach(function(item) {
+                    var dataRow = [];
+
+                    Object.keys(item).forEach(function(key){
+                    //var rowData = item[key].toString();
+                    //var truncatedData = rowData.substring(0, 15)
+                        dataRow.push(`<td>${item[key]}</td>`);
+                    });
+                    tableRows.push(`<tr>${dataRow}</tr>`);
+                });
+                el.innerHTML = `<table>${tableHeaders}${tableRows}</table>`;
+            });
     
          
 //Code used from Google Tutorial - https://developers.google.com/maps/documentation/javascript/importing_data
