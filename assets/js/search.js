@@ -3,6 +3,33 @@
 //var portugal = (lat: 39.3999, lon: 8.2245)
 //var switzerland = (lat: 46.8182, lon: 8.2275)
 //var spain = (lat: 40.4637, lon: 3.7492)
+  
+
+function search(event){
+    
+    var choosenCountry = $("#country").val();
+    if (!choosenCountry){
+        $("#data").html(`<p>Please select a country.</p>`);
+        return;
+    };
+    $.when(
+        $.getJSON(`https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=5&key=200735964-55871b76fd696d0af0539bd9bc3b2dd6`)
+    ).then(
+        function(response) {
+            var userData = response;
+            $("#data").html(writeToDocument(data));
+        },
+        function(errorResponse) {
+            if (errorResponse.status === 404) {
+                $("#data").html(
+                    `<h2>No info found for country</h2>`);
+            } else {
+                console.log(errorResponse);
+                $("data").html(
+                    `<h2>Error: ${errorResponse.responseJSON.message}</h2>`);
+            }
+        });
+}
 
     function getData(id,cb){
 
@@ -45,7 +72,7 @@
                     });
                     tableRows.push(`<tr>${dataRow}</tr>`);
                 });
-                el.innerHTML = `<table>${tableHeaders}${tableRows}</table>`;
+                el.innerHTML = `<table>${tableHeaders}${tableRows}</table>`.replace(/,/g, "");
             });
     
          
