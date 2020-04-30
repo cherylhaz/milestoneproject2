@@ -3,7 +3,7 @@
 //var portugal = (lat: 39.3999, lon: 8.2245)
 //var switzerland = (lat: 46.8182, lon: 8.2275)
 //var spain = (lat: 40.4637, lon: 3.7492)
-  
+
 
 function search(event){
     
@@ -12,9 +12,7 @@ function search(event){
         $("#data").html(`<p>Please select a country.</p>`);
         return;
     };
-    $.when(
-        $.getJSON(`https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=5&key=200735964-55871b76fd696d0af0539bd9bc3b2dd6`)
-    ).then(
+    $.when.call(getData).then(
         function(response) {
             var userData = response;
             $("#data").html(writeToDocument(data));
@@ -66,8 +64,7 @@ function search(event){
                     var dataRow = [];
 
                     Object.keys(item).forEach(function(key){
-                    //var rowData = item[key].toString();
-                    //var truncatedData = rowData.substring(0, 15)
+
                         dataRow.push(`<td>${item[key]}</td>`);
                     });
                     tableRows.push(`<tr>${dataRow}</tr>`);
@@ -87,6 +84,6 @@ function search(event){
             position: latLng,
             map: map
           });
-        }}
+        }};
     }
 //End of Google Code
